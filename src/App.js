@@ -1,8 +1,13 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 
-
 function App() {
+
+  function eliminarfilas(cod) {
+    const temp = articulos.filter((art)=>art.codigo !== cod);
+    setArticulos(temp)
+  }
+
   const [articulos, setArticulos] = useState([])
 
   useEffect(() => {
@@ -16,22 +21,23 @@ function App() {
   }, [])
   return (
     <div className="App">
-    
       <table border="1">
         <thead>
           <tr>
             <th>Código</th>
             <th>Descripción</th>
             <th>Precio</th>
+            <th>Borrar</th>
           </tr>
         </thead>
         <tbody>
           {articulos.map(art => {
             return (
               <tr key={art.codigo}>
-                <td>{art.codigo}</td>
-                <td>{art.descripcion}</td>
-                <td>{art.precio}</td>
+                <td >{art.codigo}</td>
+                <td >{art.descripcion}</td>
+                <td >{art.precio}</td>
+                <td><button onClick={() => eliminarfilas(art.codigo)}>Borrar</button></td>
               </tr>
             );
           })}
